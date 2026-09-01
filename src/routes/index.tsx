@@ -1,14 +1,10 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShoppingBag, ArrowUpRight, Check } from "lucide-react";
-import ImageRevealBackground from "@/components/ImageRevealBackground";
 import Drawer, { type DrawerType, type CartItem } from "@/components/Drawer";
 import LCorner from "@/components/LCorner";
 import CheckerGrid from "@/components/CheckerGrid";
 import WireframeGlobe from "@/components/WireframeGlobe";
-
-const BG_IMAGE_1 =
-  "https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260802_074534_f0d9d476-3f86-4c67-9b12-dfc63d99da41.png&w=1920&q=85";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,22 +90,6 @@ function Index() {
     <div className="min-h-screen bg-white text-black flex flex-col justify-between relative overflow-hidden font-jakarta">
       {/* Toast */}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
-
-      {/* Desktop interactive background */}
-      <ImageRevealBackground />
-
-      {/* Mobile static background */}
-      <div className="lg:hidden relative z-0">
-        <div
-          className="w-full aspect-[4/5] sm:aspect-[16/9] border border-gray-200"
-          style={{
-            backgroundImage: `url(${BG_IMAGE_1})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-      </div>
 
       {/* Content layer */}
       <div className="relative z-10 flex flex-col min-h-screen lg:min-h-screen">
