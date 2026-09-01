@@ -144,68 +144,24 @@ function Index() {
             </span>
           </button>
 
-          {/* Nav */}
-          <nav className="flex items-center" style={{ gap: "var(--gap-nav)" }}>
-            {(["SHOP", "COLLECTIONS", "JOURNAL"] as const).map((label) => (
-              <button
-                key={label}
-                onClick={() => openDrawer(label.toLowerCase() as DrawerType)}
-                className="font-jakarta font-medium uppercase hover:opacity-50 transition-opacity hidden sm:block"
-                style={{
-                  fontSize: "var(--nav)",
-                  letterSpacing: "0.2em",
-                }}
-              >
-                {label}
-              </button>
-            ))}
-
-            {/* Divider */}
-            <span className="hidden sm:block text-gray-300">|</span>
-
-            {/* Cart icon */}
-            <button
-              onClick={() => openDrawer("cart")}
-              className="relative hover:opacity-50 transition-opacity"
-              aria-label="Shopping bag"
-            >
-              <ShoppingBag
-                size="var(--icon)"
-                strokeWidth={1.5}
-                className="text-black"
-              />
-              {cartBadge && (
-                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                  {cart.length}
-                </span>
-              )}
-            </button>
-          </nav>
+          {/* Cart icon */}
+          <button
+            onClick={() => openDrawer("cart")}
+            className="relative hover:opacity-50 transition-opacity"
+            aria-label="Shopping bag"
+          >
+            <ShoppingBag
+              size="var(--icon)"
+              strokeWidth={1.5}
+              className="text-black"
+            />
+            {cartBadge && (
+              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                {cart.length}
+              </span>
+            )}
+          </button>
         </header>
-
-        {/* Mobile nav */}
-        <div
-          className="sm:hidden flex items-center justify-center"
-          style={{
-            paddingInline: "var(--pad-x)",
-            gap: "var(--gap-nav)",
-            marginTop: "-0.5rem",
-          }}
-        >
-          {(["SHOP", "COLLECTIONS", "JOURNAL"] as const).map((label) => (
-            <button
-              key={label}
-              onClick={() => openDrawer(label.toLowerCase() as DrawerType)}
-              className="font-jakarta font-medium uppercase hover:opacity-50 transition-opacity"
-              style={{
-                fontSize: "var(--nav)",
-                letterSpacing: "0.2em",
-              }}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
 
         {/* Main hero */}
         <main
