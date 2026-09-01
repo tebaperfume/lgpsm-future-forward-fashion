@@ -57,12 +57,9 @@ function Index() {
     toastTimerRef.current = setTimeout(() => setToast(null), 3000);
   }, []);
 
-  const openDrawer = useCallback(
-    (type: DrawerType) => {
-      setDrawer(type);
-    },
-    []
-  );
+  const openDrawer = useCallback((type: DrawerType) => {
+    setDrawer(type);
+  }, []);
 
   const closeDrawer = useCallback(() => {
     setDrawer(null);
@@ -124,24 +121,68 @@ function Index() {
             </span>
           </button>
 
-          {/* Cart icon */}
-          <button
-            onClick={() => openDrawer("cart")}
-            className="relative hover:opacity-50 transition-opacity"
-            aria-label="Shopping bag"
-          >
-            <ShoppingBag
-              size="var(--icon)"
-              strokeWidth={1.5}
-              className="text-black"
-            />
-            {cartBadge && (
-              <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
-                {cart.length}
-              </span>
-            )}
-          </button>
+          {/* Nav tabs */}
+          <nav className="flex items-center" style={{ gap: "var(--gap-nav)" }}>
+            {(["SHOP", "COLLECTIONS", "JOURNAL"] as const).map((label) => (
+              <button
+                key={label}
+                onClick={() => openDrawer(label.toLowerCase() as DrawerType)}
+                className="font-jakarta font-medium uppercase hover:opacity-50 transition-opacity hidden sm:block"
+                style={{
+                  fontSize: "var(--nav)",
+                  letterSpacing: "0.2em",
+                }}
+              >
+                {label}
+              </button>
+            ))}
+
+            {/* Divider */}
+            <span className="hidden sm:block text-gray-300">|</span>
+
+            {/* Cart icon */}
+            <button
+              onClick={() => openDrawer("cart")}
+              className="relative hover:opacity-50 transition-opacity"
+              aria-label="Shopping bag"
+            >
+              <ShoppingBag
+                size="var(--icon)"
+                strokeWidth={1.5}
+                className="text-black"
+              />
+              {cartBadge && (
+                <span className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                  {cart.length}
+                </span>
+              )}
+            </button>
+          </nav>
         </header>
+
+        {/* Mobile nav tabs */}
+        <div
+          className="sm:hidden flex items-center justify-center"
+          style={{
+            paddingInline: "var(--pad-x)",
+            gap: "var(--gap-nav)",
+            marginTop: "-0.5rem",
+          }}
+        >
+          {(["SHOP", "COLLECTIONS", "JOURNAL"] as const).map((label) => (
+            <button
+              key={label}
+              onClick={() => openDrawer(label.toLowerCase() as DrawerType)}
+              className="font-jakarta font-medium uppercase hover:opacity-50 transition-opacity"
+              style={{
+                fontSize: "var(--nav)",
+                letterSpacing: "0.2em",
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
         {/* Main hero */}
         <main
@@ -157,12 +198,22 @@ function Index() {
             <LCorner dir="tl" className="text-black mb-4" style={{ width: "var(--corner)", height: "var(--corner)" }} />
 
             {/* Headline */}
-            <h1 className="font-orbitron font-black uppercase" style={{ fontSize: "var(--headline)", letterSpacing: "0.08em", lineHeight: 1.05 }}>
+            <h1
+              className="font-orbitron font-black uppercase"
+              style={{
+                fontSize: "var(--headline)",
+                letterSpacing: "0.08em",
+                lineHeight: 1.05,
+              }}
+            >
               <span className="block">FUTURE</span>
               <span className="block">FORWARD</span>
               <span className="flex items-center gap-3">
                 FASHION
-                <CheckerGrid className="translate-y-[2px]" style={{ width: "var(--checker-w)", height: "var(--checker-h)" }} />
+                <CheckerGrid
+                  className="translate-y-[2px]"
+                  style={{ width: "var(--checker-w)", height: "var(--checker-h)" }}
+                />
               </span>
             </h1>
 
@@ -217,8 +268,12 @@ function Index() {
             {/* Content */}
             <div className="flex flex-col items-center text-center" style={{ padding: "var(--feature-pad)" }}>
               <WireframeGlobe className="text-black" style={{ width: "var(--globe)", height: "var(--globe)" }} />
-              <p className="font-jakarta font-semibold uppercase mt-4" style={{ fontSize: "var(--body)", letterSpacing: "0.18em", lineHeight: 1.4 }}>
-                BEYOND TRENDS.<br />
+              <p
+                className="font-jakarta font-semibold uppercase mt-4"
+                style={{ fontSize: "var(--body)", letterSpacing: "0.18em", lineHeight: 1.4 }}
+              >
+                BEYOND TRENDS.
+                <br />
                 BUILT FOR TOMORROW.
               </p>
             </div>
@@ -226,11 +281,11 @@ function Index() {
         </main>
 
         {/* Footer text */}
-        <footer
-          className="text-center pb-4"
-          style={{ paddingInline: "var(--pad-x)" }}
-        >
-          <p className="font-jakarta text-gray-400 uppercase" style={{ fontSize: "var(--micro)", letterSpacing: "0.15em" }}>
+        <footer className="text-center pb-4" style={{ paddingInline: "var(--pad-x)" }}>
+          <p
+            className="font-jakarta text-gray-400 uppercase"
+            style={{ fontSize: "var(--micro)", letterSpacing: "0.15em" }}
+          >
             LGPSM © 2026 — FUTURE FORWARD FASHION
           </p>
         </footer>
